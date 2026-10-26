@@ -1,0 +1,56 @@
+import xmlrpc.client
+from datetime import datetime, timedelta
+import random
+
+# --- Odoo Connection Details ---
+URL = 'URL'
+DB = 'DB'
+USERNAME = 'USERNAME'
+PASSWORD = 'PASSWORD'
+
+# Authenticate
+common = xmlrpc.client.ServerProxy(f'{URL}/xmlrpc/2/common')
+uid = common.authenticate(DB, USERNAME, PASSWORD, {})
+models = xmlrpc.client.ServerProxy(f'{URL}/xmlrpc/2/object')
+
+print(f"Connected successfully! User ID: {uid}")
+
+# 1. Fetch existing partner IDs to attach invoices to
+partner_ids = models.execute_kw(DB, uid, PASSWORD, 'res.partner', 'search', [[['customer_rank', '>', 0]]])
+if not partner_ids:
+    # Fallback if no customers found, grab any partners
+    partner_ids = models.execute_kw(DB, uid, PASSWORD, 'res.partner', 'search', [[]])
+
+# 2. Generate 25 test invoices with varying due dates (some past due, some current)
+today = datetime.today().date()
+
+for i in range(100):
+    partner_id = random.choice(partner_ids)
+    # Stagger dates: some 40 days ago (overdue), some today
+    days_offset = random.choice([-45, -30, -15, 0, 10, 20])
+    invoice_date = (today + timedelta(days=days_offset)).strftime('%Y-%m-%d')
+    due_date = (today + timedelta(days=days_offset + 30)).strftime('%Y-%m-%d')
+    
+    invoice_id = models.execute_kw(
+        DB, uid, PASSWORD,
+        'account.move', 'create',
+        [{
+            'move_type': 'out_invoice',
+            'partner_id': partner_id,
+            'invoice_date': invoice_date,
+            'invoice_date_due': due_date,
+            'invoice_line_ids': [
+                (0, 0, {
+                    'name': 'IT Consulting & Automation Services',
+                    'quantity': random.randint(1, 5),
+                    'price_unit': random.choice([150.0, 300.0, 750.0]),
+                })
+            ]
+        }]
+    )
+    
+    # Optional: post the invoice so it goes from 'draft' to 'posted' status
+    models.execute_kw(DB, uid, PASSWORD, 'account.move', 'action_post', [[invoice_id]])
+    print(f"Created & Posted Invoice ID: {invoice_id} with date {invoice_date}")
+    
+    print("\nSuccessfully generated test invoice batch!")
