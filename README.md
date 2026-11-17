@@ -33,13 +33,13 @@ Visual 1 ('Top Debtors 2026'):
 
 Visual 2 ('Total Amount On Track / Overdue'): 
 ![On Track / Overdue](Images/Overdue.png)
-* **Majority Current ('On Track'):** Out of **€2.655K** tracked, **€2.41K (90.89%)** is currently `On Track`, keeping overall due payments very low.
+* **Majority Current (`On Track`):** Out of **€2.655K** tracked, **€2.41K (90.89%)** is currently `On Track`, keeping overall due payments very low.
 * **Overdue Breakdown:**
   * **Primary Overdue Bucket:** `Overdue by 15 days` accounts for the largest overdue share at **€0.23K (8.7%)**.
   * **Minor / Tail Buckets:** Other overdue aging brackets (`1`, `7`, `16`, and `22` days) make up a minimal share (**0.15%** / rounded to **€0K** at `K` scale).
 
 Visual 3 (Total Inventory Value per Product):
-![Total Inventory Value](Images/Total_Inventory.png)
+![Total Inventory Value](Images/Products.png)
 ![KPI's](Images/Total_Inventory.png)
 * **Macro Inventory Baseline:** Across all products, total catalog valuation reaches **32M** ($ - USD) across **9K** total units on hand.
 * **Top-Heavy Value Concentration:** Inventory value is strongly concentrated in **Large Cabinet** (exceeding **20M** USD), followed by **Customizable Desk** (~**7.5M** USD)[cite: 15] and **Individual Workplace** (~**1.4M** USD).
