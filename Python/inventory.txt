@@ -1,0 +1,94 @@
+# Import Remote Procedure Call
+import xmlrpc.client
+import pandas as pd
+
+# Odoo Connection Details
+URL = 'YOUR-URL'
+DB = 'YOUR-DB'
+USERNAME = 'USERNAME'
+PASSWORD = 'PASSWORD'
+
+# Getting UID
+common = xmlrpc.client.ServerProxy(f'{URL}/xmlrpc/2/common')
+uid = common.authenticate(DB, USERNAME, PASSWORD, {})
+models = xmlrpc.client.ServerProxy(f'{URL}/xmlrpc/2/object')
+
+if not uid:
+    print("Authentication failed. Check your URL, DB name, and credentials.")
+    exit()
+
+print(f"Connected to Odoo! User ID: {uid}\n")
+
+# Stock Quants and Product Info
+def check_inventory_reorder_stock():
+    # Query current stock levels per product/location
+    quant_ids = models.execute_kw(DB, uid, PASSWORD, 'stock.quant', 'search', [[['location_id.usage', '=', 'internal']]])
+    quant = models.execute_kw(DB, uid, PASSWORD, 'stock.quant', 'read', [quant_ids], {'fields': ['product_id', 'available_quantity', 'location_id']})
+                                  
+    # Creating DataFrame
+    df_stock = pd.DataFrame(quant)
+
+    # Unpack the 'product_id' list into a clean integer ID and a string Name
+    df_stock['product_id_val'] = df_stock['product_id'].apply(lambda x: x[0] if isinstance(x, list) else x)
+    df_stock['quant_name_backup'] = df_stock['product_id'].apply(lambda x: x[1] if isinstance(x, list) and len(x) > 1 else "Unknown")
+
+    # Extract Location ID and Location Name
+    df_stock['location_id_val'] = df_stock['location_id'].apply(lambda x: x[0] if isinstance(x, list) else x)
+    df_stock['location_name'] = df_stock['location_id'].apply(lambda x: x[1] if isinstance(x, list) and len(x) > 1 else "Unknown Location")
+    
+    # Get all unique product IDs from our stock table
+    unique_product_ids = df_stock['product_id_val'].dropna().unique().tolist()
+
+    # Product catalog table for exact names and internal references (SKUs)
+    if unique_product_ids:
+        products = models.execute_kw(DB, uid, PASSWORD, 'product.product', 'read', [unique_product_ids], {'fields': ['display_name', 'default_code', 'standard_price']})
+    else:
+        products = []
+
+    # Rename id to match for merging
+    if products:
+        product_rows = []
+        for p in products:
+            product_rows.append({
+            'product_id_val': p.get('id'),
+            'product_name': p.get('display_name', 'unkown'),
+            'sku': p.get('default_code', ''),
+            'unit_cost': p.get('standard_price', 0.0)
+        })
+        df_products = pd.DataFrame(product_rows)
+    else:
+        df_products = pd.DataFrame(columns=['product_id_val', 'product_name', 'sku', 'unit_cost'])
+
+    # Merge stock data with the official product catalog data
+    df_merged = pd.merge(df_stock, df_products, on='product_id_val', how='left')
+
+    # Fallback missing names/SKUs/costs
+    df_merged['product_name'] = df_merged['product_name'].fillna(df_merged['quant_name_backup'])
+    df_merged['sku'] = df_merged['sku'].fillna('')
+    df_merged['location'] = df_merged['unit_cost'].fillna(0.0)
+    #if 'product_name' not in df_merged.columns or df_merged['product_name'].isna().all():
+    #df_merged['product_name'] = df_merged['product_id_fallback'] if 'product_id_fallback' in df_merged.columns else 'Unkown'
+    #if 'sku' not in df_merged.columns:
+       # df_merged['sku'] = ''
+
+    # Aggregate stock by product
+    df_summary = df_merged.groupby(['product_id_val', 'product_name', 'sku', 'location_name', 'unit_cost'], as_index=False)['available_quantity'].sum()
+
+    # Identifying low stock
+    low_stock_items = df_summary[df_summary['available_quantity'] <= 20]
+
+    print(f"Found {len(low_stock_items)} products below safety stock levels.")
+
+    # Printing Dataframe
+    print(f"Successfully loaded {len(df_summary)} inventory into Pandas:\n")
+    print(df_summary.to_string(index=False))
+
+    # Export to .CSV
+    filename = "Odoo_inventory_2026.csv"
+    df_summary.to_csv(filename, index=False, encoding='utf-8')
+    print(f"Report successfully exported to {filename}!")
+
+    return df_summary
+
+if __name__ == "__main__":
+    check_inventory_reorder_stock()
