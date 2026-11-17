@@ -42,7 +42,7 @@ Visual 3 (Total Inventory Value per Product):
 ![Total Inventory Value](Images/Products.png)
 ![KPI's](Images/Total_Inventory.png)
 * **Macro Inventory Baseline:** Across all products, total catalog valuation reaches **32M** ($ - USD) across **9K** total units on hand.
-* **Top-Heavy Value Concentration:** Inventory value is strongly concentrated in **Large Cabinet** (exceeding **20M** USD), followed by **Customizable Desk** (~**7.5M** USD) and **Individual Workplace** (~**1.4M** USD).
+* **Top-Heavy Value Concentration:** Inventory value is strongly concentrated in **Large Cabinet** (exceeding **20M** USD), followed by **Customizable Desk** (**7.5M** USD) and **Individual Workplace** (**1.4M** USD).
 * **Long-Tail & Minimal-Value Items:** Mid-tier items such as **Drawer**, **Cable Management Box**, **Cabinet with Doors**, **Office Chair Black**, **Desk Combination**, **Storage Box**, **Pedal Bin**, and **Corner Desk Left Sit** contribute smaller shares near the lower end of the axis, while **Acoustic Bloc Screens** and **Conference Chair** sit near **0M** USD in total value.
 
 
