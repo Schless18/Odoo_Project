@@ -1,0 +1,19 @@
+product_id_val,product_name,sku,location_name,unit_cost,available_quantity
+8,[FURN_7800] Desk Combination,FURN_7800,WH/Stock,300.0,4.0
+12,"[FURN_0096] Customizable Desk (Steel, White)",FURN_0096,WH/Stock,500.0,45.0
+13,"[FURN_0097] Customizable Desk (Steel, Black)",FURN_0097,WH/Stock,500.0,50.0
+14,"[FURN_0098] Customizable Desk (Aluminium, White)",FURN_0098,WH/Stock,500.0,55.0
+17,[E-COM07] Large Cabinet,E-COM07,WH/Stock,800.0,270.0
+18,[E-COM08] Storage Box,E-COM08,WH/Stock,14.0,18.0
+20,[E-COM10] Pedal Bin,E-COM10,WH/Stock,10.0,22.0
+21,[E-COM11] Cabinet with Doors,E-COM11,WH/Stock,120.5,18.0
+23,[E-COM12] Conference Chair (Steel),E-COM12,WH/Stock,0.0,26.0
+24,[E-COM13] Conference Chair (Aluminium),E-COM13,WH/Stock,0.0,30.0
+25,[FURN_0269] Office Chair Black,FURN_0269,WH/Stock,180.0,10.0
+26,[FURN_1118] Corner Desk Left Sit,FURN_1118,WH/Stock,78.0,2.0
+30,[FURN_0789] Individual Workplace,FURN_0789,WH/Stock,876.0,16.0
+32,[FURN_6667] Acoustic Bloc Screens (White),FURN_6667,WH/Stock,0.0,0.0
+33,[FURN_8855] Drawer,FURN_8855,WH/Stock,100.0,65.0
+44,"[DESK0005] Customizable Desk (Custom, White)",DESK0005,WH/Stock,0.0,65.0
+45,"[DESK0006] Customizable Desk (Custom, Black)",DESK0006,WH/Stock,0.0,70.0
+48,[FURN_5555] Cable Management Box,FURN_5555,WH/Stock/Shelf 2,70.0,90.0
