@@ -1,4 +1,4 @@
-Odoo Project & PowerBI Analytics
+Odoo Project & Power BI Analytics
 
 ## Project Summary  
 A Python and Power BI data engineering and business intelligence project automating the extraction, transformation, and reporting of financial data (account.move) from a self-hosted Odoo ERP system. The pipeline extracts invoice records, calculates aging metrics, and visualizes cash flow risks and customer payment behavior across thousands of synthetic invoice transactions.
@@ -25,22 +25,24 @@ To optimize engineering effort and deliver immediate business value, the solutio
 
 ## Key Odoo Analytics & Insights
 
-Visual 1 (Pending): 
-![Pending](Pending)
-* **Pending:** Pending.
-* **Pending:** Pending.
+Visual 1 ('Top Debtors 2026'): 
+![Top Debtors](Images/Debtors.png)
 
-Visual 2 (Pending): 
-![Pending](Pending)
-* **Pending:** Pending.
-* **Pending:** Pending:
-  * **Pending:** Pending.
-  * **Pending:** Pending.
+* **High Receivables Concentration:** All three top debtors exceed **€10M** in total amount due, led by **Acme Corporation** (~€11.5M), followed closely by **Azure Interior** (~€11.0M) and **AT Company** (~€10.4M).
+* **Balanced Top-Tier Exposure:** The gap across the top three accounts is relatively narrow (~€1.1M spread between #1 and #3), meaning collection performance on any single major account materially impacts total receivables.
 
-Visual 3 (Pending):
-![Pending](Pending)
-* **Pending:** Pending.
-* **Pending:** Pending.
-* **Pending:** Pending.
+Visual 2 ('Total Amount On Track / Overdue'): 
+![On Track / Overdue](Images/Overdue.png)
+* **Majority Current ('On Track'):** Out of **€2.655K** tracked, **€2.41K (90.89%)** is currently `On Track`, keeping overall due payments very low.
+* **Overdue Breakdown:**
+  * **Primary Overdue Bucket:** `Overdue by 15 days` accounts for the largest overdue share at **€0.23K (8.7%)**.
+  * **Minor / Tail Buckets:** Other overdue aging brackets (`1`, `7`, `16`, and `22` days) make up a minimal share (**0.15%** / rounded to **€0K** at `K` scale).
+
+Visual 3 (Total Inventory Value per Product):
+![Total Inventory Value](Images/Total_Inventory.png)
+![KPI's](Images/Total_Inventory.png)
+* **Macro Inventory Baseline:** Across all products, total catalog valuation reaches **32M** ($ - USD) across **9K** total units on hand.
+* **Top-Heavy Value Concentration:** Inventory value is strongly concentrated in **Large Cabinet** (exceeding **20M** USD), followed by **Customizable Desk** (~**7.5M** USD)[cite: 15] and **Individual Workplace** (~**1.4M** USD).
+* **Long-Tail & Minimal-Value Items:** Mid-tier items such as **Drawer**, **Cable Management Box**, **Cabinet with Doors**, **Office Chair Black**, **Desk Combination**, **Storage Box**, **Pedal Bin**, and **Corner Desk Left Sit** contribute smaller shares near the lower end of the axis, while **Acoustic Bloc Screens** and **Conference Chair** sit near **0M** USD in total value.
 
 
