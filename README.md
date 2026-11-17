@@ -45,6 +45,6 @@ Visual 3 (Total Inventory Value per Product):
 * **Top-Heavy Value Concentration:** Inventory value is strongly concentrated in **Large Cabinet** (exceeding **20M** USD), followed by **Customizable Desk** (**7.5M** USD) and **Individual Workplace** (**1.4M** USD).
 * **Long-Tail & Minimal-Value Items:** Mid-tier items such as **Drawer**, **Cable Management Box**, **Cabinet with Doors**, **Office Chair Black**, **Desk Combination**, **Storage Box**, **Pedal Bin**, and **Corner Desk Left Sit** contribute smaller shares near the lower end of the axis, while **Acoustic Bloc Screens** and **Conference Chair** sit near **0M** USD in total value.
 
-* **![FOR VIEWING ALL THE CHARTS; PLEASE FOLLOW THIS LINK AND OPEN THE POWER BI FILES](Power BI/Odoo_DueInvoices.pbix) or (Power BI/Odoo_Inventory.pbix).
+![FOR VIEWING ALL THE CHARTS, PLEASE FOLLOW THE FOLLOWING LINKS AND OPEN THE POWER BI FILES](Power BI/Odoo_DueInvoices.pbix) or (Power BI/Odoo_Inventory.pbix).
 
 
